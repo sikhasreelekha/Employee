@@ -1,0 +1,1180 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='description', content='')
+    meta(name='author', content='Dashboard')
+    meta(name='keyword', content='Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina')
+    title EIS-Employee Information Sheet
+    link(type='image/png', href='adityalogo.png', rel='icon')
+    // Bootstrap core CSS
+    link(href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css', rel='stylesheet')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js')
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
+    // Custom styles for this template
+    link(href='stylesheets/style.css', rel='stylesheet')
+    link(href='stylesheets/index.css', rel='stylesheet')
+    link(href='stylesheets/style-responsive.css', rel='stylesheet')
+    // Data tables CSS
+    link(rel='stylesheet', type='text/css', href='https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css')
+    link(rel='stylesheet', type='text/css', href='https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css')
+    // HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
+    //if lt IE 9
+    script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+    script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+    script(src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js")
+    //print
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jQuery.print/1.3.3/jQuery.print.min.js')
+    script(src='https://allurewebsolutions.com/allure.js')
+  body
+    section#container
+      // header start
+      header.header.black-bg
+        .sidebar-toggle-box
+          .fa.fa-bars.tooltips(data-placement='right', data-original-title='Toggle Navigation')
+        // logo start
+        a.logo(href='/dashbord')
+          b
+            img.img-responsive(src='images/eis.jpg',style='height:55px;width:100px;margin-top:-13px')
+        // logo end
+        .navbar-custom-menu
+          
+          a.btn.btn-info.top-nav.navbar-right(href='/logout')
+            i.fa.fa-sign-out.fa-lg
+            |  Logout
+          -if(user.role=="Faculty"){
+            .col-xs-2.pull-right
+              .notification
+                img(src='https://s3.amazonaws.com/codecademy-content/projects/2/feedster/bell.svg')
+                .badge #{notlength}
+                ul.notification-menu
+                  -for(i=0;i<notify.length;i++){
+                    li
+                      <button class='btn btn-danger delete' value=#{notify[i].EmpId}>X</button>
+                      br
+                      h3 #{notify[i].Content}
+                  -}
+          -}
+      // header end
+      //
+        **********************************************************************************************************************************************************
+        MAIN SIDEBAR MENU
+        ***********************************************************************************************************************************************************
+      // sidebar start
+      aside
+        #sidebar.nav-collapse
+          // sidebar menu start
+          ul#nav-accordion.sidebar-menu
+            p.centered
+              a(href='#')
+                img.img-circle(src='images/'+user.id+'.jpg', width='80')
+            h5.centered
+              p #{user.username}
+            li.sub-menu
+              a(data-toggle='tab', href='#education')
+                i.fa.fa-book
+                span Technical
+              ul.sub
+                  li.smen
+                    a(data-toggle='tab', href='#qua') Qualifications
+                  li.smen
+                    a(data-toggle='tab', href='#ach') Achievements
+                    ul.sub
+                      li.smen
+                        a(data-toggle='tab', href='#cer') Certifications
+                      li.smen
+                        a(data-toggle='tab', href='#pub') Publications
+                      
+                  li.smen
+                    a(data-toggle='tab', href='#ski') Skills
+                    ul.sub
+                      li.smen
+                        a(data-toggle='tab', href='#wor') Workshops/FDP
+                      li.smen
+                        a(data-toggle='tab', href='#pro') Projects
+                        ul.sub
+                          li.smen
+                            a(data-toggle='tab', href='#done') Done
+                          li.smen
+                            a(data-toggle='tab', href='#guided') Guided
+                  li.smen
+                    a(data-toggle='tab', href='#other') Other_Achievements      
+                      
+            li.sub-menu
+              a(data-toggle='tab', href='#personal')
+                i.fa.fa-book
+                span Personal
+            li.sub-menu
+              a(data-toggle='tab', href='#Profile')
+                i.fa.fa-user-circle-o
+                span profile
+            -if(user.role=="HOD"){
+              li.sub-menu
+                a(data-toggle='tab', href='#Notification')
+                  i.fa.fa-bell
+                  span Notification
+            -}
+            -if(user.role=="HOD"){
+              li.sub-menu
+                a(data-toggle='tab', href='#Report')
+                  i.fa.fa-edit
+                  span Report
+            -}
+      //sidebar menu end
+      //sidebar end
+      //
+        **********************************************************************************************************************************************************
+        MAIN CONTENT
+        ***********************************************************************************************************************************************************
+      // main content start
+      section#main-content
+        section.wrapper.site-min-height
+          h3
+            i
+          .row.mt
+            .col-lg-12
+              .tab-content
+                #qua.tab-pane.fade.in.active
+                  .row.dashboard-stats.container
+                    .col-md-2.col-sm-6.col-md-offset-8
+                        section.panel.panel-box
+                          .panel-left.panel-icon.bg-success
+
+                            i.fa.fa-book
+                          .panel-right.panel-icon.bg-reverse
+                            p.text-muted.no-margin.text
+                              span
+                            Strong
+                              p(style='margin-top:10px').size-h2 Technical
+                  .row
+                    .container
+                      .col-md-12(style='background-color:#fff')
+                        .personal_details
+                          h3 Qualification
+                          .col-lg-12(style='background-color:#fff')
+                            form(action="/qualification" method="post" enctype="multipart/form-data" onsubmit="return ValidateForm(this);" )
+                              table(border="0" cellpadding="5" cellspacing="0")
+                                tr
+                                  td(colspan="2")
+                                    label(for="qualification")
+                                      b Qualification_Name*
+                                    br
+                                    input.form-control(type="text" name="Qualification" value="" onKeypress='return event.charCode>=60 && event.charCode<=122' style="width: 535px" required)
+                                tr
+                                  td(colspan="2")
+                                    label(for="Institution")
+                                      b Institute*
+                                    br
+                                    input.form-control(name="Institution" type="text" onKeypress='return event.charCode>=60 && event.charCode<=122' maxlength="100" style="width: 535px" required)
+                                
+                                tr
+                                  td(colspan="2")
+                                    label(for="dob")
+                                      b Date_of_obtain
+                                    br
+                                    input.form-control(name="DOB" type="date" maxlength="255" value="" style="width: 535px" required)
+                                
+                                tr
+                                  td(style="width: 50%")
+                                    label(for="Duration")
+                                      b  Duration
+                                    br
+                                    select.form-control(name='Duration', style="width: 535px")
+                                      option(value='days') days 
+                                      option(value='weeks') weeks
+                                      option(value='months') months
+                                      option(value='years') years
+                                tr
+                                  td(colspan="2")
+                                    br
+                                    input.form-control(name="days" type="text" maxlength="255" value="" style="width: 535px" onKeypress='return event.charCode>=48 && event.charCode<=57' required)
+                                tr
+                                  td(colspan="2")
+                                    label(for="Percentage/CGPA")
+                                      b Percentage/CGPA
+                                    br
+                                    //input.form-control(name="CGPA" type="text" maxlength="255" value="" style="width: 535px")
+                                    select.form-control(name='CGPA', style="width: 535px")
+                                      option(value='Percentage') Percentage 
+                                      option(value='CGPA') CGPA
+                                tr
+                                  td(colspan="2") 
+                                    br
+                                    input.form-control(name="PercentageCGPA" type="number" placeholder="0.1" maxlength="255" value="" style="width: 535px" minvalue="0" maxvalue="100" required)
+                                tr
+                                  td(colspan="2")
+                                    label(for="Stream/Specialization")
+                                      b Stream/Specialization
+                                    br
+                                    input.form-control(name="Specialization" type="text" onKeypress='return event.charCode>=60 && event.charCode<=122' maxlength="255" value="" style="width: 535px" required)
+                                tr
+                                  td
+                                    label(for="Upload")
+                                      b Uploaddoc
+                                    br
+                                    input.form-control(name="image" type="file" style="width: 535px" required)
+                                tr
+                                  td
+                                    br
+                                    input.btn.btn-info(type="submit" value="submit" name="save")
+                #cer.tab-pane.fade.align
+                  .row.dashboard-stats.container
+                    .col-md-2.col-sm-6.col-md-offset-8
+                        section.panel.panel-box
+                          .panel-left.panel-icon.bg-success
+                            i.fa.fa-book
+                          .panel-right.panel-icon.bg-reverse
+                            p.text-muted.no-margin.text
+                              span
+                            Strong
+                              p(style='margin-top:10px').size-h2 Technical
+                  .row
+                    .container
+                      .col-md-12(style='background-color:#fff')
+                        .personal_details
+                          h3 Certifcation
+                          .col-lg-12(style='background-color:#fff')
+                              form(action="/cert" method="post" enctype="multipart/form-data"  onsubmit="return ValidateForm(this);")
+                                table(border="0" cellpadding="5" cellspacing="0")
+                                  tr
+                                    td(style="width: 50%")
+                                      label(for="Type")
+                                        b  Type
+                                      br
+                                      input.form-control(name="Type" type="text" onKeypress='return event.charCode>=60 && event.charCode<=122' maxlength="50" style="width: 535px" required)
+                                  tr
+                                  td(style="width: 50%")
+                                    label(for="Duration")
+                                      b  Duration
+                                    br
+                                    select.form-control(name='Duration', style="width: 535px" required)
+                                      option(value='days') days 
+                                      option(value='weeks') weeks
+                                      option(value='months') months
+                                      option(value='years') years
+                                      //option(value='yearly') yearly 
+                                  tr
+                                    td(colspan="2")
+                                      //label(for="days")
+                                        b days
+                                      br
+                                      input.form-control(name="days" type="number" maxlength="100" style="width: 535px")
+                                  
+                                  tr
+                                    td(colspan="2")
+                                      label(for="Name")
+                                        b Name
+                                      br
+                                      input.form-control(name="Name" type="text" maxlength="100" style="width: 535px" required)
+                                  tr
+                                    td(colspan="2")
+                                      label(for="Issuedby")
+                                        b Issuedby
+                                      br
+                                      input.form-control(name="Issuedby" type="text" maxlength="255" value=" " style="width: 535px" required)
+                                  tr
+                                  td(colspan="2")
+                                    label(for="dob")
+                                      b Date_of_obtain
+                                    br
+                                    input.form-control(name="DOB" type="date" maxlength="255" value="" style="width: 535px" required)
+                                  tr
+                                  td(colspan="2")
+                                    label(for="Score")
+                                      b Score
+                                    br
+                                    input.form-control(name="Score" type="number" maxlength="255" value="" style="width: 535px" required)
+                                  tr
+                                    td(colspan="2")
+                                      label(for="Upload")
+                                        b Uploaddoc
+                                      br
+                                      input.form-control(name="image" type="file" style="width: 535px" required)
+                                      br
+                                      input.btn.btn-info(name="skip_submit" type="submit" value="Submit")
+                #other.tab-pane.fade.align
+                  .row.dashboard-stats.container
+                    .col-md-2.col-sm-6.col-md-offset-8
+                        section.panel.panel-box
+                          .panel-left.panel-icon.bg-success
+
+                            i.fa.fa-book
+                          .panel-right.panel-icon.bg-reverse
+                            p.text-muted.no-margin.text
+                              span
+                            Strong
+                              p(style='margin-top:10px').size-h2 Technical
+                  .row
+                    .container
+                      .col-md-12(style='background-color:#fff')
+                        .personal_details
+                          h3 Other_Achievements
+                          .col-lg-12(style='background-color:#fff')
+                            form(action="/otherachievements" method="post" enctype="multipart/form-data" onsubmit="return ValidateForm(this);" )
+                              table(border="0" cellpadding="5" cellspacing="0")
+                                tr
+                                  td(colspan="2")
+                                    label(for="Achievement_Name")
+                                      b Achievement_Name*
+                                    br
+                                    input.form-control(name="Achievement_Name" type="text" maxlength="100" style="width: 535px" required)
+                                tr
+                                  td(colspan="2")
+                                    label(for="Purpose")
+                                      b Purpose*
+                                    br
+                                    input.form-control(name="Purpose" type="text" maxlength="100" style="width: 535px" required)
+                                
+                                tr
+                                  td(colspan="2")
+                                    label(for="From_where")
+                                      b From_where
+                                    br
+                                    input.form-control(name="From_where" type="text" maxlength="255" value="" style="width: 535px" required)
+                                tr
+                                  td(colspan="2")
+                                    label(for="Date_of_obtain")
+                                      b Dateofobtain
+                                    br
+                                    input.form-control(name="Dateofobtain" type="date" maxlength="255" value="" style="width: 535px" required)
+                                tr
+                                  td(colspan="2")
+                                    label(for="Percentage/CGPA")
+                                      b Percentage/CGPA
+                                    br
+                                    select.form-control(name='PercentageCGPA', style="width: 535px")
+                                      option(value='Percentage') Percentage 
+                                      option(value='CGPA') CGPA
+                                tr
+                                  td(colspan="2")
+                                    br
+                                    input.form-control(name="Percentage" type="number" maxlength="255" value="" style="width: 535px")
+                                tr
+                                  td
+                                    label(for="Upload")
+                                      b Uploaddoc
+                                    br
+                                    input.form-control(name="image" type="file" style="width: 535px" required)
+                                tr
+                                  td
+                                    br
+                                    input.btn.btn-info(type="submit" value="submit" name="save")
+                #pub.tab-pane.fade.align
+                  .row.dashboard-stats.container
+                    .col-md-2.col-sm-6.col-md-offset-8
+                        section.panel.panel-box
+                          .panel-left.panel-icon.bg-success
+
+                            i.fa.fa-book
+                          .panel-right.panel-icon.bg-reverse
+                            p.text-muted.no-margin.text
+                              span
+                            Strong
+                              p(style='margin-top:10px').size-h2 Technical
+                  .row
+                    .container
+                      .col-md-12(style='background-color:#fff')
+                        .personal_details
+                          h3 Publications
+                          .col-lg-12(style='background-color:#fff')
+                            form(action="/pub" method="post" enctype="multipart/form-data" onsubmit="return ValidateForm(this);")
+                              table(border="0" cellpadding="5" cellspacing="0")
+                                tr
+                                  td(style="width: 50%")
+                                    label(for="Type")
+                                      b  Type
+                                    br
+                                    select.form-control(name='Type', style="width: 535px")
+                                      option(value='Journals') Journals
+                                      option(value='Conference') Conference
+                                tr
+                                  td(style="width: 50%")
+                                    label(for="Scope")
+                                      b  Scope
+                                    br
+                                    select.form-control(name='Scope', style="width: 535px")
+                                      option(value='National') National
+                                      option(value='International') International
+                                      //option(value='yearly') yearly
+                                tr
+                                  td(colspan="2")
+                                    label(for="Date")
+                                      b Date
+                                    br
+                                    input.form-control(name="Date" type="date" maxlength="255" value="" style="width: 535px" required)
+                                tr
+                                  td(colspan="2")
+                                    label(for="Name")
+                                      b Name
+                                    br
+                                    input.form-control(name="Name" type="text" maxlength="100" style="width: 535px" required)
+                                tr
+                                  td(colspan="2")
+                                    label(for="Paper")
+                                      b Paper
+                                    br
+                                    input.form-control(name="Paper" type="text" maxlength="255" value="" style="width: 535px" required) 
+                                tr
+                                  td(colspan="2")
+                                    label(for="Issuedby")
+                                      b Issuedby
+                                    br
+                                    input.form-control(name="Issuedby" type="text" maxlength="255" value="" style="width: 535px" required)
+                                tr
+                                  td(colspan="2")
+                                    label(for="Title of purpose")
+                                      b Title of purpose
+                                    br
+                                    input.form-control(name="Titleofpurpose" type="text" maxlength="255" value="" style="width: 535px" required) 
+                                tr
+                                  td(colspan="2")
+                                    label(for="Upload")
+                                      b Uploaddoc
+                                    br
+                                    input.form-control(name="image" type="file" style="width: 535px" required)
+                                    br
+                                    input.btn.btn-info(name="skip_submit" type="submit" value="Submit")
+                #wor.tab-pane.fade.align
+                  .row.dashboard-stats.container
+                    .col-md-2.col-sm-6.col-md-offset-8
+                        section.panel.panel-box
+                          .panel-left.panel-icon.bg-success
+
+                            i.fa.fa-book
+                          .panel-right.panel-icon.bg-reverse
+                            p.text-muted.no-margin.text
+                              span
+                            Strong
+                              p(style='margin-top:10px').size-h2 Technical
+                  .row
+                    .container
+                      .col-md-12(style='background-color:#fff')
+                        .personal_details
+                          h3 Workshop/FDP
+                          .col-lg-12(style='background-color:#fff')     
+                            form(action="/workshop" method="post" enctype="multipart/form-data" onsubmit="return ValidateForm(this);")
+                              table(border="0" cellpadding="5" cellspacing="0")
+                                tr
+                                  td(style="width: 50%")
+                                    label(for="Name")
+                                      b  Name
+                                    br
+                                    input.form-control(name="Name" type="text" maxlength="50" style="width: 535px" required)
+                                tr
+                                  td(colspan="2")
+                                    label(for="organised_by")
+                                      b organised_by
+                                    br
+                                    input.form-control(name="organisedby" type="text" maxlength="100" style="width: 535px" required)
+                                
+                                tr
+                                  td(style="width: 50%")
+                                    label(for="Duration")
+                                      b  Duration
+                                    br
+                                    select.form-control(name='Duration', style="width: 535px")
+                                      option(value='days') days 
+                                      option(value='weeks') weeks
+                                      option(value='months') months
+                                      option(value='years') years
+                                tr
+                                  td(colspan="2")
+                                    
+                                    br
+                                    input.form-control(name="days" type="text" maxlength="100" style="width: 535px" required)
+                                tr
+                                  td(style="width: 50%")
+                                    label(for="Type")
+                                      b  Type
+                                    br
+                                    select.form-control(name='Type', style="width: 535px")
+                                      option(value='workshops') workshops
+                                      option(value='FDP') FDP
+                                tr    
+                                  td(colspan="2")
+                                    label(for="Upload")
+                                      b Uploaddoc
+                                    br
+                                    input.form-control(name="image" type="file" style="width: 535px" required)
+                                    br
+                                tr
+                                    td(style='white-space:no-wrap')
+                                      br
+                                      input.btn.btn-info(name="skip_submit" type="submit" value="Submit")
+
+                #done.tab-pane.fade.align
+                  .row.dashboard-stats.container
+                    .col-md-2.col-sm-6.col-md-offset-8
+                        section.panel.panel-box
+                          .panel-left.panel-icon.bg-success
+
+                            i.fa.fa-book
+                          .panel-right.panel-icon.bg-reverse
+                            p.text-muted.no-margin.text
+                              span
+                            Strong
+                              p(style='margin-top:10px').size-h2 Technical
+                  .row
+                    .container
+                      .col-md-12(style='background-color:#fff')
+                        .personal_details
+                          h3 Done
+                          .col-lg-12(style='background-color:#fff')                 
+                            form(action="/done" method="post" enctype="multipart/form-data" onsubmit="return ValidateForm(this);")
+                              table(border="0" cellpadding="5" cellspacing="0")
+                                tr
+                                  td(style="width: 50%")
+                                    label(for="Project_Title")
+                                      b Project_Title
+                                    br
+                                    input.form-control(name="Project_Title" type="text" maxlength="50" style="width: 535px" required)
+
+                                tr
+                                  td(style="width: 50%")
+                                    label(for="purpose")
+                                      b  purpose
+                                    br
+                                    select.form-control(name='Purpose', style="width: 535px")
+                                      option(value='National') National
+                                      option(value='International') International
+                                      option(value='Local') Local
+                                      //option(value='yearly') yearly 
+                                tr
+                                  td(style="width: 50%")
+                                    label(for="Duration")
+                                      b  Duration
+                                    br
+                                    select.form-control(name='Duration', style="width: 535px")
+                                      option(value='days') days 
+                                      option(value='weeks') weeks
+                                      option(value='months') months
+                                      option(value='years') years
+                                tr
+                                  td(colspan="2")
+                                    
+                                    br
+                                    input.form-control(name="days" type="text" maxlength="100" style="width: 535px" required)
+                                tr
+                                  td(colspan="2")
+                                    label(for="Technical_Domain")
+                                      b Technical_Domain
+                                    br
+                                    input.form-control(name="Technical_Domain" type="text" maxlength="255" value="" style="width: 535px" required)
+                                
+                                tr
+                                  td(colspan="2")
+                                    label(for="description")
+                                      b Description
+                                    br
+                                    input.form-control(name="Description" type="text" maxlength="255" value="" style="width: 535px" required)
+                                tr
+                                  td(colspan="2")
+                                    label(for="Grants")
+                                      b Grants
+                                    br
+                                    input.form-control(name="Grants" type="text" maxlength="255" value="" style="width: 535px" required)
+                                tr
+                                  td(style="width: 50%")
+                                    label(for="Status")
+                                      b  Status
+                                    br
+                                    select.form-control(name='Status', style="width: 535px")
+                                      option(value='completed') completed
+                                      option(value='Ongoing') ongoing
+                                tr
+                                  td(colspan="2")
+                                    label(for="Upload")
+                                      b Uploaddoc
+                                    br
+                                    input.form-control(name="image" type="file" style="width: 535px" required)
+                                trh
+                                  td(style='white-space:no-wrap')
+                                    br
+                                    input.btn.btn-info(name="skip_submit" type="submit" value="Submit")
+                #guided.tab-pane.fade.align
+                  .row.dashboard-stats.container
+                    .col-md-2.col-sm-6.col-md-offset-8
+                        section.panel.panel-box
+                          .panel-left.panel-icon.bg-success
+
+                            i.fa.fa-book
+                          .panel-right.panel-icon.bg-reverse
+                            p.text-muted.no-margin.text
+                              span
+                            Strong
+                              p(style='margin-top:10px').size-h2 Technical
+                  .row
+                    .container
+                      .col-md-12(style='background-color:#fff')
+                        .personal_details
+                          h3 Guided
+                          .col-lg-12(style='background-color:#fff')                 
+                            form(action="/guided" method="post" enctype="multipart/form-data" onsubmit="return ValidateForm(this);")
+                              table(border="0" cellpadding="5" cellspacing="0")
+                                tr
+                                tr
+                                  td(style="width: 50%")
+                                    label(for="Project_Title")
+                                      b Project_Title
+                                    br
+                                    input.form-control(name="Project_Title" type="text" maxlength="50" style="width: 535px" required)
+
+                                tr
+                                  td(style="width: 50%")
+                                    label(for="purpose")
+                                      b  purpose
+                                    br
+                                    select.form-control(name='Purpose', style="width: 535px")
+                                      option(value='National') National
+                                      option(value='International') International
+                                      option(value='Local') Local
+                                      //option(value='yearly') yearly 
+                                tr
+                                  td(style="width: 50%")
+                                    label(for="Duration")
+                                      b  Duration
+                                    br
+                                    select.form-control(name='Duration', style="width: 535px")
+                                      option(value='days') days 
+                                      option(value='weeks') weeks
+                                      option(value='months') months
+                                      option(value='years') years
+                                tr
+                                  td(colspan="2")
+                                    
+                                    br
+                                    input.form-control(name="days" type="text" maxlength="100" style="width: 535px" required)
+                                tr
+                                  td(colspan="2")
+                                    label(for="Technical_Domain")
+                                      b Technical_Domain
+                                    br
+                                    input.form-control(name="Technical_Domain" type="text" maxlength="255" value="" style="width: 535px")
+                                
+
+                                tr
+                                  td(colspan="2")
+                                    label(for="description")
+                                      b Description
+                                    br
+                                    input.form-control(name="Description" type="text" maxlength="255" value="" style="width: 535px")
+                                tr
+                                  td(colspan="2")
+                                    label(for="Grants")
+                                      b Grants
+                                    br
+                                    input.form-control(name="Grants" type="text" maxlength="255" value="" style="width: 535px")
+                                tr
+                                  td(style="width: 50%")
+                                    label(for="Status")
+                                      b  Status
+                                    br
+                                    select.form-control(name='Status', style="width: 535px")
+                                      option(value='completed') completed
+                                      option(value='Ongoing') ongoing
+                                tr
+                                  td(colspan="2")
+                                    label(for="Upload")
+                                      b Uploaddoc
+                                    br
+                                    input.form-control(name="image" type="file" style="width: 535px")
+                                tr
+                                  td(style='white-space:no-wrap')
+                                    br
+                                    input.btn.btn-info(name="skip_submit" type="submit" value="Submit")
+                #personal.tab-pane.fade.align
+                  .row.dashboard-stats.container
+                    .col-md-2.col-sm-6.col-md-offset-8
+                        section.panel.panel-box
+                          .panel-left.panel-icon.bg-success
+
+                            i.fa.fa-book
+                          .panel-right.panel-icon.bg-reverse
+                            p.text-muted.no-margin.text
+                              span
+                            Strong
+                              p(style='margin-top:10px').size-h2 personal
+                    .row
+                      .container
+                        .col-md-12(style='background-color:#fff')
+                          .personal_details
+                            h3 Personal
+                            .col-lg-12(style='background-color:#fff')
+                              form(action="/personal" method="post" onsubmit="return ValidateForm(this);")
+                                
+                                table(border="0" cellpadding="5" cellspacing="0")
+                                  tr
+                                    td(style="width: 50%")
+                                      label(for="First_name")
+                                        b First_name *
+                                      br
+                                      input.form-control(name="First_name" type="text" maxlength="50" style="width: 260px")
+                                    td(style="width: 50%")
+                                      label(for="Last_name")
+                                        b Last_name *
+                                      br
+                                      input.form-control(name="Last_name" type="text" maxlength="50" style="width: 260px")
+                                  tr  
+                                  label(for="Email_Address")
+                                    b Email_Address *
+                                  br
+                                  input.form-control(name="Email_Address" type="text" value=data[0].email maxlength="100" style="width: 535px" readonly)
+                                  tr
+                                    td(colspan="2")
+                                      label(for="userid")
+                                        b userid *
+                                      br
+                                      input.form-control(name="userid" type="number" value=data[0].id maxlength="100" style="width: 535px" readonly)
+                                  tr
+                                    td
+                                      label(for="Date_of_joining")
+                                        b Date_of_joining *
+                                      br
+                                      input.form-control(name="Date_of_joining" type="date" maxlength="255" value=" " style="width: 535px")
+                                  
+                                  tr
+                                    td
+                                      label(for="Salary")
+                                        b Salary
+                                      br
+                                      input.form-control(name="Salary" type="number" maxlength="50" style="width: 260px")
+                                  
+                                  tr
+                                    td
+                                      label(for="Phone")
+                                        b Phone *
+                                      br
+                                      input.form-control(name="Phone" type="number" value=data[0].mobile maxlength="50" style="width: 260px" readonly)
+                                  tr
+                                    td
+                                      label(for="Alternativephone")
+                                        b Alternativephone
+                                      br
+                                      input.form-control(name="Alternativephone" type="number" maxlength="50" style="width: 260px")
+                                      br
+                                        
+                                 
+                                  tr
+                                    td
+                                      input.btn.btn-info(type="submit" name="submit" value="submit")
+                #Profile.tab-pane.fade.align
+                  br
+                  br
+                  br
+                  br
+                  .row
+                    .container
+                      .col-md-12(style='background-color:#fff; width:100%;box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);ss')#print-box
+                        .profile-card.js-profile-card
+                          .profile-card__img
+                            img(src='images/'+user.id+'.jpg', alt='profile card')
+                          .profile-card__cnt.js-profile-cnt
+                            .profile-card__name #{user.username}
+                            .profile-card__name #{user.role}
+                          .personal_details
+                            h3 Qualifications
+                            table.content.table.table-bordered.table-striped.table-hover
+                              thead
+                                tr 
+                                  th Name
+                                  th Qualification
+                                  th Institution
+                                  th Duration
+                                  th Uploaddoc
+                                  th Date_of_obtain
+                                  th PercentageCGPA
+                                  th Stream/specialization
+                              tbody
+                                each member in quali
+                                  tr
+                                    td #{member.User}
+                                    td #{member.Qualification}
+                                    td #{member.Institution}
+                                    td #{member.days} #{member.Duration}
+                                    td #{member.Image}
+                                    td #{member.DOB}
+                                    td #{member.percentage} #{member.CGPA}
+                                    td #{member.Specialization}
+                          .personal_details
+                            h3 CERTIFICATIONS
+                            table.table.table-bordered.table-striped.table-hover
+                                thead
+                                  tr 
+                                    th Name
+                                    th Type
+                                    th Duration
+                                    th Issuedby
+                                    th DOB
+                                    th Score
+                                    th Uploaddoc
+                                tbody
+                                  each member in certi
+                                    tr
+                                      td #{member.Name}
+                                      td #{member.Type}
+                                      td #{member.days} #{member.Duration}
+                                      td #{member.Issuedby}
+                                      td #{member.DOB}
+                                      td #{member.score}
+                                      td 
+                                        a(href='uploads/'+member.Image target='_blank') #{member.Image}  
+                          .personal_details
+                              h3 Publications
+                              table.table.table-bordered.table-striped.table-hover
+                                thead
+                                  tr 
+                                    th Type
+                                    th Date
+                                    th Name
+                                    th Paper
+                                    th Issuedby
+                                    th Scope
+                                    //th period
+                                    th Titleofpurpose
+                                    th Uploaddoc
+                                tbody
+                                  each member in publi
+                                    tr
+                                      td #{member.Type}
+                                      td #{member.Date}
+                                      td #{member.Name}
+                                      td #{member.Paper}
+                                      td #{member.Issuedby}
+                                      td #{member.Scope}
+                                      td #{member.Titleofpurpose}
+                                      //td #{member.period}
+                                      td 
+                                        a(href='uploads/'+member.Image target='_blank') #{member.Image}  
+                          .personal_details
+                              h3 Workshops/FDP
+                              table.table.table-bordered.table-striped.table-hover
+                                thead
+                                  tr 
+                                    th organisedby
+                                    th Name
+                                    th Duration
+                                    th Type
+                                    th Uploaddoc
+                                tbody
+                                  each member in wor
+                                    tr
+                                      td #{member.organisedby}
+                                      td #{member.Name}
+                                      td #{member.days} #{member.Duration}
+                                      td #{member.Type}
+                                      td 
+                                        a(href='uploads/'+member.Image target='_blank') #{member.Image}  
+                          .personal_details
+                              h3 Projects Done
+                              table.table.table-bordered.table-striped.table-hover
+                                thead
+                                  tr 
+                                    th Project_Title
+                                    th Description
+                                    th Grants
+                                    th Duration
+                                    th Status
+                                    th Technical_Domain
+                                    th Purpose
+                                    th Uploaddoc
+                                tbody
+                                  each member in done
+                                    tr
+                                      td #{member.Project_Title}
+                                      td #{member.Description}
+                                      td #{member.Grants}
+                                      td #{member.days} #{member.Duration}
+                                      td #{member.Status}
+                                      td #{member.Technical_Domain}
+                                      td #{member.Purpose}
+                                      td 
+                                        a(href='uploads/'+member.Image target='_blank') #{member.Image}  
+
+                          .personal_details
+                              h3 Projects Guided
+                              table.table.table-bordered.table-striped.table-hover
+                                thead
+                                  tr 
+                                    th Project_Title
+                                    th Description
+                                    th Grants
+                                    th Duration
+                                    th Status
+                                    th Technical_Domain
+                                    th Purpose
+                                    th Uploaddoc
+                                tbody
+                                  each member in guided
+                                    tr
+                                      td #{member.Project_Title}
+                                      td #{member.Description}
+                                      td #{member.Grants}
+                                      td #{member.days} #{member.Duration}
+                                      td #{member.Status}
+                                      td #{member.Technical_Domain}
+                                      td #{member.Purpose}
+                                      td 
+                                        a(href='uploads/'+member.Image target='_blank') #{member.Image}  
+
+                          .personal_details
+                              h3 Other_Achievements
+                              table.table.table-bordered.table-striped.table-hover
+                                  thead
+                                    tr 
+                                      th Achievement_Name
+                                      th Purpose
+                                      th From_where
+                                      th Dateofobtain
+                                      th PercentageCGPA   
+                                      th Uploaddoc
+                                  tbody
+                                    each member in otherachievements
+                                      tr
+                                        td #{member.Achievement_Name}
+                                        td #{member.Purpose}
+                                        td #{member.From_where}
+                                        //td #{member.Duration}
+                                        td #{member.Dateofobtain}
+                                        td #{member.Percentage} #{member.CGPA}
+                                        td 
+                                          a(href='uploads/'+member.Image target='_blank') #{member.Image}  
+                        center
+                          button.btn.btn-primary.hidden-print(onclick='PrintContent()')
+                            span.glyphicon.glyphicon-print(aria-hidden='true')
+                            |  Print
+                #Notification.tab-pane.fade.align
+                  ul.nav.nav-tabs.nav-justified
+                    li.active
+                      a(data-toggle='pill', href='#individual') Individual
+                    li
+                      a(data-toggle='pill', href='#multiple') Multiple
+                    .tab-content
+                      #individual.tab-pane.fade.in.active
+                        br
+                        br
+                        .container.col-md-4.col-md-offset-4(style='background-color:#fff; border:1px solid black; padding:20px;')
+                          form.form-group(action='/mail', method='post')
+                            label Enter Email :
+                            input.form-control(type='text' name='email' required)
+                            label Enter Subject :
+                            input.form-control(type='text' name='subject' required)
+                            label Enter Content :
+                            textarea.form-control(name='content' rows='15' required)
+                            br
+                            input.btn.btn-info(type='submit')
+                      #multiple.tab-pane.fade.align
+                        br
+                        br
+                        .container.col-md-4.col-md-offset-4(style='background-color:#fff; border:1px solid black; padding:20px;')
+                          form.form-group(action='/multimail', method='post')
+                            label Enter Subject :
+                            input.form-control(type='text' name='subject' required)
+                            label Enter Content :
+                            textarea.form-control(name='content' rows='15' required)
+                            br
+                            input.btn.btn-info(type='submit')
+                #Report.tab-pane.fade.align
+                  ul.nav.nav-tabs.nav-justified
+                    li.active
+                      a(data-toggle='pill', href='#work') Workshops
+                    li
+                      a(data-toggle='pill', href='#proj') Projects
+                    li
+                      a(data-toggle='pill', href='#cert') Certifications
+                    li
+                      a(data-toggle='pill', href='#othe') Other Achievements
+                    .tab-content
+                      #work.tab-pane.fade.in.active
+                        br
+                        br
+                        .container(style='background-color:white')
+                          br
+                          br
+                          table.tabledata.table.table-bordered.table-striped.table-hover
+                            thead
+                              tr 
+                                th organisedby
+                                th Name
+                                th Duration
+                                th Type
+                                th Uploaddoc
+                            tbody
+                              each member in wor
+                                tr
+                                  td #{member.organisedby}
+                                  td #{member.Name}
+                                  td #{member.days} #{member.Duration}
+                                  td #{member.Type}
+                                  td 
+                                    a(href='uploads/'+member.Image target='_blank') #{member.Image}
+                      #proj.tab-pane.fade.align
+                        ul.nav.nav-tabs.nav-justified
+                          li.active
+                            a(data-toggle='pill', href='#don') Done
+                          li
+                            a(data-toggle='pill', href='#gui') Guided
+                          br
+                          br
+                          .tab-content
+                            #don.tab-pane.fade.in.active
+                              br
+                              br
+                              .container(style='background-color:white')
+                                br
+                                br
+                                table.tabledata.table.table-bordered.table-striped.table-hover
+                                  thead
+                                    tr 
+                                      th Project_Title
+                                      th Description
+                                      th Grants
+                                      th Duration
+                                      th Status
+                                      th Technical_Domain
+                                      th Purpose
+                                      th Uploaddoc
+                                  tbody
+                                    each member in done
+                                      tr
+                                        td #{member.Project_Title}
+                                        td #{member.Description}
+                                        td #{member.Grants}
+                                        td #{member.days} #{member.Duration}
+                                        td #{member.Status}
+                                        td #{member.Technical_Domain}
+                                        td #{member.Purpose}
+                                        td 
+                                          a(href='uploads/'+member.Image target='_blank') #{member.Image}
+                            #gui.tab-pane.fade.align
+                              br
+                              br
+                              .container(style='background-color:white')
+                                br
+                                br
+                                table.tabledata.table.table-bordered.table-striped.table-hover
+                                  thead
+                                    tr 
+                                      th Project_Title
+                                      th Description
+                                      th Grants
+                                      th Duration
+                                      th Status
+                                      th Technical_Domain
+                                      th Purpose
+                                      th Uploaddoc
+                                  tbody
+                                    each member in guided
+                                      tr
+                                        td #{member.Project_Title}
+                                        td #{member.Description}
+                                        td #{member.Grants}
+                                        td #{member.days} #{member.Duration}
+                                        td #{member.Status}
+                                        td #{member.Technical_Domain}
+                                        td #{member.Purpose}
+                                        td 
+                                          a(href='uploads/'+member.Image target='_blank') #{member.Image}
+                      #cert.tab-pane.fade.align
+                        br
+                        br
+                        .container(style='background-color:white')
+                          br
+                          br
+                          table.tabledata.table.table-bordered.table-striped.table-hover
+                            thead
+                              tr 
+                                th Name
+                                th Type
+                                th Duration
+                                th Issuedby
+                                th DOB
+                                th Score
+                                th Uploaddoc
+                            tbody
+                              each member in certi
+                                tr
+                                  td #{member.Name}
+                                  td #{member.Type}
+                                  td #{member.days} #{member.Duration}
+                                  td #{member.Issuedby}
+                                  td #{member.DOB}
+                                  td #{member.score}
+                                  td 
+                                    a(href='uploads/'+member.Image, target='_blank') #{member.Image}
+                      #othe.tab-pane.fade.align
+                        br
+                        br
+                        .container(style='background-color:white')
+                          table.tabledata.table.table-bordered.table-striped.table-hover
+                            thead
+                              tr 
+                                th Achievement_Name
+                                th Purpose
+                                th From_where
+                                th Dateofobtain
+                                th PercentageCGPA   
+                                th Uploaddoc
+                            tbody
+                              each member in otherachievements
+                                tr
+                                  td #{member.Achievement_Name}
+                                  td #{member.Purpose}
+                                  td #{member.From_where}
+                                  //td #{member.Duration}
+                                  td #{member.Dateofobtain}
+                                  td #{member.Percentage} #{member.CGPA}
+                                  td 
+                                    a(href='uploads/'+member.Image target='_blank') #{member.Image}
+    // main content end
+    // js placed at the end of the document so the pages load faster
+    script(src='javascripts/jquery.js')
+    script(src='javascripts/bootstrap.min.js')
+    script(src='javascripts/jquery-ui-1.9.2.custom.min.js')
+    script(src='javascripts/jquery.ui.touch-punch.min.js')
+    script.include(type='text/javascript', src='javascripts/jquery.dcjqaccordion.2.7.js')
+    script(src='javascripts/jquery.scrollTo.min.js')
+    script(src='javascripts/jquery.nicescroll.js', type='text/javascript')
+    // common script for all pages
+    script(src='javascripts/common-scripts.js')
+    //Datatable js
+    script(src='https://code.jquery.com/jquery-3.3.1.js')
+    script(src='https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js')
+    script(src='https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js')
+    script(src='https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js')
+    script(src='https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js')
+    script(src='https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js')
+    script(src="javascripts/download.js")  
+    script(src='javascripts/index.js')
+    script.
+      $(document).ready(function() {
+        $('.tabledata').dataTable({
+          dom: 'Bfrtip',
+          buttons: [
+              {
+                  extend: 'copy',
+                  title: 'Report'
+              },
+              {
+                  extend: 'csvHtml5',
+                  title: 'Report'
+              },
+              {
+                  extend: 'excelHtml5',
+                  title: 'Report'
+              },
+              {
+                  extend: 'pdfHtml5',
+                  title: 'Report'
+              },
+              {
+                  extend: 'print',
+                  title: 'Report'
+              },
+          ]
+        });
+      });

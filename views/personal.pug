@@ -1,0 +1,102 @@
+html
+  head
+    h2  PERSONAL INFORMATION SHEET
+    meta(charset="utf-8")
+    title PERSONAL INFORMATION SHEET
+    style(type="text/css").
+      body
+      {
+      margin: 500;
+      padding: 0;
+      background:white;
+      background-size: cover;
+      font-family: sans-serif;
+      }
+  form#EmploymentApplication100(action="/personal" method="post" onsubmit="return ValidateForm(this);")
+    script(type="text/javascript").
+      function ValidateForm(frm) {
+      if (frm.First_Name.value == "") { alert('First name is required.'); frm.First_Name.focus(); return false; }
+      if (frm.Last_Name.value == "") { alert('Last name is required.'); frm.Last_Name.focus(); return false; }
+      if (frm.Email_Address.value == "") { alert('Email address is required.'); frm.Email_Address.focus(); return false; }
+      if (frm.Email_Address.value.indexOf("@") < 1 || frm.Email_Address.value.indexOf(".") < 1) { alert('Please enter a valid email address.'); frm.Email_Address.focus(); return false; }
+      if (frm.Position.value == "") { alert('Position is required.'); frm.Position.focus(); return false; }
+      if (frm.Phone.value == "") { alert('Phone is required.'); frm.Phone.focus(); return false; }
+      return true; }
+    table(border="0" cellpadding="5" cellspacing="0")
+      tr
+        td(style="width: 50%")
+          label(for="First_name")
+            b First_name *
+          br
+          input(name="First_name" type="text" maxlength="50" style="width: 260px")
+        td(style="width: 50%")
+          label(for="Last_name")
+            b Last_name *
+          br
+          input(name="Last_name" type="text" maxlength="50" style="width: 260px")
+      tr  
+      label(for="Email_Address")
+        b Email_Address *
+      br
+      input(name="Email_Address" type="text" maxlength="100" style="width: 535px")
+      tr
+        td(colspan="2")
+          label(for="userId")
+            b userid *
+          br
+          input(name="userid" type="number" maxlength="100" style="width: 535px")
+      
+      tr
+        td
+          label(for="Salary")
+            b Salary
+          br
+          input(name="Salary" type="number" maxlength="50" style="width: 260px")
+        td
+          label(for="Date_of_joining")
+            b Date_of_joining
+          br
+          input(name="Date_of_joining" type="date" maxlength="50" style="width: 260px")
+      tr
+        td
+          label(for="Phone")
+            b Phone *
+          br
+          input(name="Phone" type="number" maxlength="50" style="width: 260px")
+        td
+          label(for="Alternativephone")
+            b Alternativephone
+          br
+          input(name="Alternativephone" type="number" maxlength="50" style="width: 260px")
+      tr
+        td
+          input(type="submit" name="save" value="save")
+
+
+
+
+
+
+
+
+
+
+
+//tr
+                                    td(colspan="2")
+                                      label(for="Relocate")
+                                        b Relocate?
+                                      br
+                                      input.form-control(name="Relocate" type="radio" value="Yes" checked="checked")
+                                      |  Yes      
+                                      input.form-control(name="Relocate" type="radio" value="No")
+                                      |  No      
+                                      input.form-control(name="Relocate" type="radio" value="NotSure")
+                                      |  Not sure
+                                  control(name="Organization" type="text" maxlength="100" style="width: 535px")
+                                  tr
+                                    td
+                                      label(for="Reference")
+                                        b Reference
+                                      br
+                                      textarea(name="Reference" rows="7" cols="40" style="width: 535px")
